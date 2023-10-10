@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Book {
+public:
+    // Constructor
+    Book(const string& title, const string& author, double price, int stock)
+        : title(title), author(author), price(price), stock(stock) {}
+
+    // Accessors
+    string getTitle() const { return title; }
+    string getAuthor() const { return author; }
+    double getPrice() const { return price; }
+    int getStock() const { return stock; }
+
+    // Mutators
+    void setStock(int newStock) { stock = newStock; }
+
+private:
+    string title;
+    string author;
+    double price;
+    int stock;
+};
+
+class Bookstore {
+public:
+    // Constructor
+    Bookstore() {}
+
+    // Functions
+    void addBook(const Book& book) {
+        books.push_back(book);
+    }
+
+    void displayBooks() const {
+        cout << "Available Books:\n";
+        for (const Book& book : books) {
+            cout << "Title: " << book.getTitle() << "\n";
+            cout << "Author: " << book.getAuthor() << "\n";
+            cout << "Price: $" << book.getPrice() << "\n";
+            cout << "Stock: " << book.getStock() << "\n\n";
+        }
+    }
+
+private:
+    vector<Book> books;
+};
+
+int main() {
+    Bookstore myBookstore;
+
+    // Adding books to the bookstore
+    Book book1("The Catcher in the Rye", "J.D. Salinger", 12.99, 5);
+    Book book2("To Kill a Mockingbird", "Harper Lee", 9.99, 8);
+    Book book3("1984", "George Orwell", 10.99, 3);
+
+    myBookstore.addBook(book1);
+    myBookstore.addBook(book2);
+    myBookstore.addBook(book3);
+
+    // Displaying the available books
+    myBookstore.displayBooks();
+
+    return 0;
+}
